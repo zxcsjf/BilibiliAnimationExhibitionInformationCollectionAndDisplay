@@ -63,7 +63,6 @@ def collectEachType(area, type):
         "具体时间范围",
         "想去人数",
         "最低票价",
-        "是否有舞台（字符串匹配）",
         "Link",
         "Cover",
     ]
@@ -82,14 +81,13 @@ def collectEachPage(area, type, page):
 
 def getActivityInfo(activity):
     projectName = activity["project_name"]
-    priceLow = str(activity["price_low"])[0:-2]
+    priceLow = activity["price_low"]/100
     startTime = activity["start_time"]
     id = str(activity["id"])
     activityUrl = f"https://show.bilibili.com/platform/detail.html?id={id}"
 
     url = f"https://show.bilibili.com/api/ticket/project/getV2?version=134&id={id}&project_id={id}&requestSource=pc-new"
     details = requests.get(url=url, headers=headers).content.decode("utf-8")
-    hasDancing = "舞" in details
     details = JsonSearch(object=details, mode="s")
     wantToCount = details.search_first_value(key="wish_info")["count"]
     timeRange = details.search_first_value("project_label")
@@ -105,7 +103,6 @@ def getActivityInfo(activity):
         timeRange,
         wantToCount,
         (priceLow if priceLow != "" else saleFlag),
-        hasDancing,
         activityUrl,
         coverUrl,
     ]
