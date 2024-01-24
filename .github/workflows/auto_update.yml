@@ -1,10 +1,11 @@
 name: Update xlsx
-
+env:
+  TZ: Asia/Shanghai
 # mannually trigger workflow or run on schedule
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 15/6 * * ?"
+    - cron: "0 0/6 * * ?"
 
 jobs:
   update-xlsx:
