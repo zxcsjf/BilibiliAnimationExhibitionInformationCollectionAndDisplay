@@ -4,7 +4,7 @@ name: Update xlsx
 on:
   workflow_dispatch:
   schedule:
-    - cron: "39 14/6 * * ?"
+    - cron: "53 11/4 * * *"
 
 jobs:
   update-xlsx:
