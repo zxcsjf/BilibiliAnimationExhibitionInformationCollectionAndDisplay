@@ -4,7 +4,7 @@ name: Update xlsx
 on:
   workflow_dispatch:
   schedule:
-    - cron: "54 0/4 * * *"
+    - cron: "54 0/3 * * *"
 
 jobs:
   update-xlsx:
@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.10"
-      - run: pip install -r requirements.txtw
+      - run: pip install -r requirements.txt
       - run: python main.py
       - run: python excel_to_json.py
       - uses: s0/git-publish-subdir-action@develop
